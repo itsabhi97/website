@@ -7,6 +7,18 @@
   --color-primary: #3b82f6;
   --color-accent: #8b5cf6;
   --font-sans: var(--font-inter);
+
+  --animate-marquee: marquee 35s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(-100% / 3));
+    }
+  }
 }
 
 :root {

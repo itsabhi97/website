@@ -3,6 +3,8 @@ import Image from "next/image";
 import { ArrowRight, Code2, Database, Cloud } from "lucide-react";
 import TechStack from "@/components/TechStack";
 import ExperienceSection from "@/components/ExperienceSection";
+import Typewriter from "@/components/animations/Typewriter";
+import FadeIn from "@/components/animations/FadeIn";
 
 export default function Home() {
   return (
@@ -17,41 +19,50 @@ export default function Home() {
             </div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-            Data Engineer & <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500">Cloud Architect</span>
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight min-h-[140px] md:min-h-[180px]">
+            <Typewriter text="Data Engineer &" delay={0.2} /> <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500">
+              <Typewriter text="Cloud Architect" delay={1.0} />
+            </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-neutral-400 mb-10 leading-relaxed">
-            Building robust, highly-scalable data systems and intelligent cloud infrastructure. Over 7 years of experience helping organizations transform complexity into seamless performance.
-          </p>
+          <FadeIn delay={1.8}>
+            <p className="text-lg md:text-xl text-neutral-400 mb-10 leading-relaxed max-w-2xl">
+              Building robust, highly-scalable data systems and intelligent cloud infrastructure. Over 7 years of experience helping organizations transform complexity into seamless performance.
+            </p>
+          </FadeIn>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <Link
-              href="/projects"
-              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-black bg-white hover:bg-neutral-200 transition-colors duration-200"
-            >
-              View Work <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 border border-white/10 text-base font-medium rounded-lg text-white bg-white/5 hover:bg-white/10 transition-colors duration-200"
-            >
-              Get in Touch
-            </Link>
-          </div>
+          <FadeIn delay={2.0}>
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <Link
+                href="/projects"
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-black bg-white hover:bg-neutral-200 transition-colors duration-200"
+              >
+                View Work <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-6 py-3 border border-white/10 text-base font-medium rounded-lg text-white bg-white/5 hover:bg-white/10 transition-colors duration-200"
+              >
+                Get in Touch
+              </Link>
+            </div>
+          </FadeIn>
         </div>
 
         <div className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2">
-          <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-[0_0_40px_-10px_rgba(59,130,246,0.3)] group">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
-            <Image
-              src="/images/profile.jpg"
-              alt="Developer Profile Picture"
-              fill
-              className="object-cover object-center transition-transform duration-700 group-hover:scale-110"
-              priority
-            />
-          </div>
+          <FadeIn direction="left" delay={0.5}>
+            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-[0_0_40px_-10px_rgba(59,130,246,0.3)] group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
+              <Image
+                src="/images/profile.jpg"
+                alt="Developer Profile Picture"
+                fill
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-110"
+                priority
+              />
+            </div>
+          </FadeIn>
         </div>
       </div>
 

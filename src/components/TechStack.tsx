@@ -40,44 +40,50 @@ export default function TechStack() {
                 Technologies I've successfully deployed in production. Click on any technology to see the projects where it was utilized.
             </p>
 
-            <div className="flex flex-wrap gap-4">
-                {uniqueTags.map((tag) => {
-                    const slug = tag.toLowerCase().replace(/\s+/g, '-');
+            <div className="relative flex overflow-hidden w-full group py-4">
+                {/* Fade masks */}
+                <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#050505] to-transparent z-20 pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#050505] to-transparent z-20 pointer-events-none" />
 
-                    // Case-insensitive generic file match for the exact slug (ignoring extension)
-                    const matchingIconFile = availableIcons.find(
-                        file => file.toLowerCase().replace(/\.[^/.]+$/, "") === slug
-                    );
+                <div className="flex w-max animate-marquee space-x-6 hover:[animation-play-state:paused] ml-0 text-center">
+                    {[...uniqueTags, ...uniqueTags, ...uniqueTags].map((tag, index) => {
+                        const slug = tag.toLowerCase().replace(/\s+/g, '-');
 
-                    const hasIcon = !!matchingIconFile;
-                    const iconFileName = matchingIconFile ? `/icons/${matchingIconFile}` : '';
+                        // Case-insensitive generic file match for the exact slug (ignoring extension)
+                        const matchingIconFile = availableIcons.find(
+                            file => file.toLowerCase().replace(/\.[^/.]+$/, "") === slug
+                        );
 
-                    return (
-                        <Link
-                            key={tag}
-                            href={`/projects/tag/${encodeURIComponent(tag.toLowerCase())}`}
-                            className="group relative flex flex-col items-center justify-center p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 overflow-hidden w-28 h-28"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                        const hasIcon = !!matchingIconFile;
+                        const iconFileName = matchingIconFile ? `/icons/${matchingIconFile}` : '';
 
-                            {hasIcon ? (
-                                <div className="relative z-10 w-12 h-12 mb-2 transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
-                                    <Image
-                                        src={iconFileName}
-                                        alt={`${tag} Icon`}
-                                        fill
-                                        sizes="(max-width: 48px) 100vw, 48px"
-                                        className="object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.15)] rounded-xl overflow-hidden"
-                                    />
-                                </div>
-                            ) : null}
+                        return (
+                            <Link
+                                key={`${tag}-${index}`}
+                                href={`/projects/tag/${encodeURIComponent(tag.toLowerCase())}`}
+                                className="group relative flex flex-col items-center justify-center p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 overflow-hidden shrink-0 w-32 h-32"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-                            <span className={`relative z-10 text-xs font-medium text-center transition-colors ${hasIcon ? 'text-neutral-400 group-hover:text-white' : 'text-neutral-300 group-hover:text-white text-sm'}`}>
-                                {tag}
-                            </span>
-                        </Link>
-                    );
-                })}
+                                {hasIcon ? (
+                                    <div className="relative z-10 w-12 h-12 mb-3 transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
+                                        <Image
+                                            src={iconFileName}
+                                            alt={`${tag} Icon`}
+                                            fill
+                                            sizes="(max-width: 48px) 100vw, 48px"
+                                            className="object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.15)] rounded-xl overflow-hidden"
+                                        />
+                                    </div>
+                                ) : null}
+
+                                <span className={`relative z-10 text-xs font-semibold tracking-wide text-center transition-colors ${hasIcon ? 'text-neutral-400 group-hover:text-white' : 'text-neutral-300 group-hover:text-white text-sm'}`}>
+                                    {tag}
+                                </span>
+                            </Link>
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );

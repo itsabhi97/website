@@ -1,5 +1,6 @@
 import React from 'react';
 import { Briefcase } from 'lucide-react';
+import GlowCard from '@/components/animations/GlowCard';
 
 interface ExperienceCardProps {
     title: string;
@@ -13,7 +14,7 @@ export default function ExperienceCard({ title, company, date, contentHtml }: Ex
         <div className="relative pl-8 md:pl-0">
             <div className="md:hidden absolute left-0 top-1 h-full w-px bg-white/10" />
 
-            <div className="group relative rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+            <GlowCard className="group relative rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
                 <div className="md:hidden absolute -left-10 top-6 w-5 h-5 rounded-full bg-blue-500/20 border-4 border-[#050505] flex items-center justify-center">
                     <div className="w-2 h-2 rounded-full bg-blue-400" />
                 </div>
@@ -31,7 +32,7 @@ export default function ExperienceCard({ title, company, date, contentHtml }: Ex
 
                 <div className="prose prose-sm prose-invert prose-blue max-w-none prose-p:text-neutral-400 prose-li:text-neutral-400 prose-li:marker:text-blue-500"
                     dangerouslySetInnerHTML={{ __html: contentHtml }} />
-            </div>
+            </GlowCard>
         </div>
     );
 }
