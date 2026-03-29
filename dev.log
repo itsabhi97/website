@@ -1,0 +1,14 @@
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.1.2:3001
+
+✓ Starting...
+✓ Ready in 543ms
+ GET /projects/data-lake-aws 200 in 1819ms (compile: 1647ms, generate-params: 288ms, render: 171ms)
+Persisting failed: Unable to open static sorted file referenced from 00000041.meta
+
+Caused by:
+    0: Unable to open static sorted file 00000040.sst
+    1: No such file or directory (os error 2)
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
