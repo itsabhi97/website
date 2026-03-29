@@ -12,10 +12,15 @@ export interface ParsedData {
     date: string;
     desc?: string;
     tags?: string[];
+    company?: string;
+    issuer?: string;
+    credentialUrl?: string;
+    icon?: string;
+    content?: string;
     [key: string]: any;
 }
 
-export function getSortedPostsData(type: 'blog' | 'projects'): ParsedData[] {
+export function getSortedPostsData(type: 'blog' | 'projects' | 'experience' | 'certifications'): ParsedData[] {
     const dirPath = path.join(contentDirectory, type);
     // Setup directory if it doesn't exist just in case
     if (!fs.existsSync(contentDirectory)) fs.mkdirSync(contentDirectory);
@@ -36,7 +41,8 @@ export function getSortedPostsData(type: 'blog' | 'projects'): ParsedData[] {
         // Combine the data with the id
         return {
             slug,
-            ...(matterResult.data as { date: string; title: string; desc?: string; tags?: string[] }),
+            content: matterResult.content,
+            ...(matterResult.data as { date: string; title: string; desc?: string; tags?: string[]; company?: string; issuer?: string; credentialUrl?: string; icon?: string }),
         };
     });
 

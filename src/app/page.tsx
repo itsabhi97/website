@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Code2, Database, Cloud } from "lucide-react";
 import TechStack from "@/components/TechStack";
+import ExperienceSection from "@/components/ExperienceSection";
 
 export default function Home() {
   return (
@@ -74,6 +75,7 @@ export default function Home() {
       </div>
 
       <TechStack />
+      <ExperienceSection />
     </div>
   );
 }

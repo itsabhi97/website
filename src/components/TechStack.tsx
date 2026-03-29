@@ -14,7 +14,16 @@ export default function TechStack() {
 
     if (uniqueTags.length === 0) return null;
 
-    const publicDir = path.join(process.cwd(), 'public');
+    const publicDir = path.join(process.cwd(), 'public', 'icons');
+    let availableIcons: string[] = [];
+
+    try {
+        if (fs.existsSync(publicDir)) {
+            availableIcons = fs.readdirSync(publicDir);
+        }
+    } catch (e) {
+        console.error("Error reading public/icons directory", e);
+    }
 
     return (
         <div className="w-full mt-24 mb-16 border-t border-white/5 pt-16">
@@ -34,8 +43,14 @@ export default function TechStack() {
             <div className="flex flex-wrap gap-4">
                 {uniqueTags.map((tag) => {
                     const slug = tag.toLowerCase().replace(/\s+/g, '-');
-                    const iconFileName = `/icons/${slug}.png`;
-                    const hasIcon = fs.existsSync(path.join(publicDir, iconFileName));
+
+                    // Case-insensitive generic file match for the exact slug (ignoring extension)
+                    const matchingIconFile = availableIcons.find(
+                        file => file.toLowerCase().replace(/\.[^/.]+$/, "") === slug
+                    );
+
+                    const hasIcon = !!matchingIconFile;
+                    const iconFileName = matchingIconFile ? `/icons/${matchingIconFile}` : '';
 
                     return (
                         <Link
@@ -46,13 +61,13 @@ export default function TechStack() {
                             <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
                             {hasIcon ? (
-                                <div className="relative z-10 w-12 h-12 mb-2 transition-transform duration-500 group-hover:scale-110">
+                                <div className="relative z-10 w-12 h-12 mb-2 transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
                                     <Image
                                         src={iconFileName}
                                         alt={`${tag} Icon`}
                                         fill
                                         sizes="(max-width: 48px) 100vw, 48px"
-                                        className="object-contain"
+                                        className="object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.15)] rounded-xl overflow-hidden"
                                     />
                                 </div>
                             ) : null}
