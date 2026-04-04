@@ -1,4 +1,5 @@
 import { getSortedPostsData } from '@/lib/markdown';
+import { slugifyTag as slugifier } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Layers } from 'lucide-react';
@@ -60,7 +61,7 @@ export default function TechStack() {
                         return (
                             <Link
                                 key={`${tag}-${index}`}
-                                href={`/projects/tag/${encodeURIComponent(tag.toLowerCase())}`}
+                                href={`/projects/tag/${slugifier(tag)}`}
                                 className="group relative flex flex-col items-center justify-center p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 overflow-hidden shrink-0 w-32 h-32"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />

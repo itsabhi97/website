@@ -1,14 +1,39 @@
 import { getSortedPostsData } from '@/lib/markdown';
+import { slugifyTag } from '@/lib/utils';
 import ProjectCard from '@/components/ProjectCard';
 import { Layers, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
 export async function generateStaticParams() {
     const projects = getSortedPostsData('projects');
-    // Extract all tags, flatten, and create a Set for uniqueness
-    const allTags = projects.flatMap(project => project.tags || []);
-    const uniqueTags = Array.from(new Set(allTags)).map(tag => tag.toLowerCase());
+    const projectTags = projects.flatMap(project => project.tags || []);
+
+    // Also extract all tags from tech-stack.md so empty tags don't throw 500s on build
+    let techStackTags: string[] = [];
+    try {
+        const mdPath = path.join(process.cwd(), 'content', 'tech-stack.md');
+        const fileContents = fs.readFileSync(mdPath, 'utf8');
+        const { data } = matter(fileContents);
+        const cats = data.categories || [];
+
+        cats.forEach((cat: any) => {
+            if (cat.name) techStackTags.push(cat.name);
+            if (cat.items) techStackTags.push(...cat.items);
+            if (cat.subcategories) {
+                cat.subcategories.forEach((sub: any) => {
+                    if (sub.name) techStackTags.push(sub.name);
+                    if (sub.items) techStackTags.push(...sub.items);
+                });
+            }
+        });
+    } catch (e) { }
+
+    const allTags = [...projectTags, ...techStackTags];
+    const uniqueTags = Array.from(new Set(allTags)).map(tag => slugifyTag(tag));
 
     return uniqueTags.map((tag) => ({
         tag: tag,
@@ -17,24 +42,26 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> {
     const { tag } = await params;
-    const decodedTag = decodeURIComponent(tag);
+    // For presentation, we just capitalize the passed slug
+    const displayTag = tag.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
     return {
-        title: `${decodedTag} Projects - Portfolio`,
-        description: `Projects showcasing my experience with ${decodedTag}.`,
+        title: `${displayTag} Projects - Portfolio`,
+        description: `Projects showcasing my experience with ${displayTag}.`,
     };
 }
 
 export default async function TagFilteredProjectsPage({ params }: { params: Promise<{ tag: string }> }) {
     const { tag } = await params;
-    const decodedTag = decodeURIComponent(tag).toLowerCase();
+    const requestedSlug = tag;
+    const displayTag = tag.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
     const allProjects = getSortedPostsData('projects');
 
-    // Filter projects by checking if any of their tags match the requested tag (case-insensitive)
+    // Filter projects by matching the slugified strings
     const filteredProjects = allProjects.filter(project => {
         if (!project.tags) return false;
-        return project.tags.some(t => t.toLowerCase() === decodedTag);
+        return project.tags.some(t => slugifyTag(t) === requestedSlug);
     });
 
     return (
@@ -53,7 +80,7 @@ export default async function TagFilteredProjectsPage({ params }: { params: Prom
                         <Layers className="w-8 h-8" />
                     </div>
                     <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white capitalize">
-                        {decodedTag} Projects
+                        {displayTag} Projects
                     </h1>
                 </div>
                 <p className="text-lg text-neutral-400 max-w-2xl">
