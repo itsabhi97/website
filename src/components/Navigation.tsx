@@ -17,7 +17,7 @@ export default function Navigation() {
                     href="/"
                     className="text-xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
                 >
-                    DevPortfolio.
+                    itsabhi97
                 </Link>
 
                 <nav className="flex space-x-6">

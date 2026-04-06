@@ -2,7 +2,7 @@
 title: "AI Survey Summarisation Platform"
 date: "2023-11-01"
 desc: "Led design and deployment of an AI survey summarisation platform using AWS serverless stack (Lambda, Cognito, Bedrock) integrating Claude Sonnet 4."
-tags: ["AWS Bedrock", "AWS Lambda", "Terraform", "AI", "Serverless"]
+tags: ["AWS", "Bedrock", "Lambda", "Terraform", "AWS CodePipeline", "Cognito", "Python"]
 ---
 
 ### Overview

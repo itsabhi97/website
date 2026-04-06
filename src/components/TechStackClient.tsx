@@ -117,12 +117,19 @@ export default function TechStackClient({ categories, availableIcons }: { catego
                         const totalItems = (category.items?.length || 0) + (category.subcategories?.reduce((acc: number, sub: any) => acc + sub.items.length, 0) || 0);
                         const isLarge = totalItems > 10;
                         const isHuge = totalItems >= 15;
+                        const iconPath = findIcon(category.name);
+                        const isSvg = iconPath?.endsWith('.svg');
 
                         return (
                             <FadeIn key={category.name} delay={i * 0.1} className={`h-full ${isLarge ? 'md:col-span-2' : ''} ${isHuge ? 'xl:row-span-2' : ''}`}>
                                 <GlowCard className="h-full flex flex-col p-6 md:p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-md">
-                                    <Link href={`/projects/tag/${slugifyTag(category.name)}`} onClick={() => setSelectedCategory(null)} className="inline-block w-fit">
-                                        <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 mb-8 tracking-tight hover:opacity-80 transition-opacity cursor-pointer">{category.name}</h2>
+                                    <Link href={`/projects/tag/${slugifyTag(category.name)}`} onClick={() => setSelectedCategory(null)} className="inline-flex items-center gap-4 w-fit mb-8 group cursor-pointer">
+                                        {iconPath && (
+                                            <div className="relative w-8 h-8 shrink-0 transition-transform duration-300 group-hover:scale-110">
+                                                <Image src={iconPath} alt={category.name} fill className={`object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${isSvg ? 'invert opacity-90' : ''}`} />
+                                            </div>
+                                        )}
+                                        <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 tracking-tight transition-opacity">{category.name}</h2>
                                     </Link>
                                     {renderCategoryContents(category)}
                                 </GlowCard>
@@ -137,6 +144,8 @@ export default function TechStackClient({ categories, availableIcons }: { catego
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 animate-in fade-in duration-700">
                     {categories.map((category: any, i: number) => {
                         const totalItems = (category.items?.length || 0) + (category.subcategories?.reduce((acc: number, sub: any) => acc + sub.items.length, 0) || 0);
+                        const iconPath = findIcon(category.name);
+                        const isSvg = iconPath?.endsWith('.svg');
 
                         return (
                             <FadeIn key={category.name} delay={i * 0.05} className="h-full">
@@ -145,6 +154,11 @@ export default function TechStackClient({ categories, availableIcons }: { catego
                                     className="w-full h-full text-left flex flex-col items-center justify-center p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] active:scale-95 group relative overflow-hidden"
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    {iconPath && (
+                                        <div className="relative w-12 h-12 mb-4 shrink-0 transition-transform duration-300 group-hover:scale-110 z-10">
+                                            <Image src={iconPath} alt={category.name} fill className={`object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${isSvg ? 'invert opacity-90' : ''}`} />
+                                        </div>
+                                    )}
                                     <h3 className="text-lg md:text-xl font-bold text-white text-center mb-2 z-10">{category.name}</h3>
                                     <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 z-10">{totalItems} Tools</span>
                                 </button>
@@ -173,8 +187,13 @@ export default function TechStackClient({ categories, availableIcons }: { catego
                             className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-4xl max-h-[85vh] overflow-y-auto z-[101] bg-[#0a0a0a] border border-white/10 rounded-3xl shadow-2xl p-6 md:p-10"
                         >
                             <div className="flex justify-between items-start mb-8 sticky top-0 bg-[#0a0a0a]/90 backdrop-blur-md pt-2 pb-4 border-b border-white/5 z-20">
-                                <Link href={`/projects/tag/${slugifyTag(selectedCategory.name)}`} onClick={() => setSelectedCategory(null)}>
-                                    <h2 className="text-3xl md:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 tracking-tight hover:opacity-80 transition-opacity cursor-pointer">
+                                <Link href={`/projects/tag/${slugifyTag(selectedCategory.name)}`} onClick={() => setSelectedCategory(null)} className="inline-flex items-center gap-4 group">
+                                    {(findIcon(selectedCategory.name)) && (
+                                        <div className="relative w-10 h-10 shrink-0 transition-transform duration-300 group-hover:scale-110">
+                                            <Image src={findIcon(selectedCategory.name)!} alt={selectedCategory.name} fill className={`object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${findIcon(selectedCategory.name)?.endsWith('.svg') ? 'invert opacity-90' : ''}`} />
+                                        </div>
+                                    )}
+                                    <h2 className="text-3xl md:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 tracking-tight transition-opacity cursor-pointer">
                                         {selectedCategory.name}
                                     </h2>
                                 </Link>

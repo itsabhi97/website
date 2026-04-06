@@ -5,6 +5,7 @@ import TechStack from "@/components/TechStack";
 import ExperienceSection from "@/components/ExperienceSection";
 import Typewriter from "@/components/animations/Typewriter";
 import FadeIn from "@/components/animations/FadeIn";
+import { personalInfo } from "@/config";
 
 export default function Home() {
   return (
@@ -20,15 +21,15 @@ export default function Home() {
           </div> */}
 
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight min-h-[140px] md:min-h-[180px]">
-            <Typewriter text="Abhishek Kurhekar" delay={0.2} /> <br />
+            <Typewriter text={personalInfo.name} delay={0.2} /> <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 text-3xl md:text-5xl block mt-4">
-              <Typewriter text="Data Engineer III" delay={1.0} />
+              <Typewriter text={personalInfo.role} delay={1.0} />
             </span>
           </h1>
 
           <FadeIn delay={1.8}>
             <p className="text-lg md:text-xl text-neutral-400 mb-10 leading-relaxed max-w-2xl">
-              6+ years of hands-on experience in Data Engineering and Analytics across major clouds (Azure, GCP, AWS) and BI Tools. Proven track record of building robust frameworks around data pipelines to ensure data quality and integrity at terabyte-scale.
+              {personalInfo.bio}
             </p>
           </FadeIn>
 
@@ -56,7 +57,7 @@ export default function Home() {
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-[0_0_40px_-10px_rgba(59,130,246,0.3)] group mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
                 <Image
-                  src="/images/profile.jpg"
+                  src={personalInfo.profilePicture}
                   alt="Developer Profile Picture"
                   fill
                   className="object-cover object-center transition-transform duration-700 group-hover:scale-110"
@@ -67,13 +68,13 @@ export default function Home() {
 
             <FadeIn direction="up" delay={0.8} className="mt-8">
               <div className="flex items-center space-x-6">
-                <Link href="https://github.com/itsabhi97" target="_blank" className="text-neutral-400 hover:text-white hover:scale-110 transition-all duration-300">
+                <Link href={personalInfo.socials.github} target="_blank" className="text-neutral-400 hover:text-white hover:scale-110 transition-all duration-300">
                   <Github className="w-7 h-7" />
                 </Link>
-                <Link href="https://www.linkedin.com/in/abhishek-kurhekar-239ab7155/" target="_blank" className="text-neutral-400 hover:text-[#0A66C2] hover:scale-110 transition-all duration-300">
+                <Link href={personalInfo.socials.linkedin} target="_blank" className="text-neutral-400 hover:text-[#0A66C2] hover:scale-110 transition-all duration-300">
                   <Linkedin className="w-7 h-7" />
                 </Link>
-                <Link href="mailto:akurhekar0@gmail.com" className="text-neutral-400 hover:text-red-400 hover:scale-110 transition-all duration-300">
+                <Link href={`mailto:${personalInfo.socials.email}`} className="text-neutral-400 hover:text-red-400 hover:scale-110 transition-all duration-300">
                   <Mail className="w-7 h-7" />
                 </Link>
               </div>

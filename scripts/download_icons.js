@@ -20,7 +20,7 @@ const tools = [
 const slugify = (text) => text.toLowerCase().replace(/[^a-z0-9]/g, '');
 
 const overrides = {
-    'postgres': 'postgresql',
+    'postgres': 'PostgresSQL',
     'spark': 'apachespark',
     'pyspark': 'apachespark',
     'sparksql': 'apachespark',

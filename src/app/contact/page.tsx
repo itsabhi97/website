@@ -1,5 +1,6 @@
 import { Mail, MapPin, Target } from "lucide-react";
 import Link from 'next/link';
+import { personalInfo } from '@/config';
 
 export default function ContactPage() {
     return (
@@ -23,10 +24,10 @@ export default function ContactPage() {
                         I usually respond within 24-48 hours.
                     </p>
                     <a
-                        href="mailto:hello@example.com"
+                        href={`mailto:${personalInfo.socials.email}`}
                         className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-sm font-medium rounded-lg text-black bg-white hover:bg-neutral-200 transition-colors duration-200 w-full"
                     >
-                        hello@example.com
+                        {personalInfo.socials.email}
                     </a>
                 </div>
 
@@ -39,7 +40,7 @@ export default function ContactPage() {
                         Need architect-level advice for cloud migrations? Let's talk.
                     </p>
                     <Link
-                        href="https://linkedin.com" target="_blank"
+                        href={personalInfo.socials.linkedin} target="_blank"
                         className="inline-flex items-center justify-center px-6 py-3 border border-white/10 text-sm font-medium rounded-lg text-white bg-white/5 hover:bg-white/10 transition-colors duration-200 w-full"
                     >
                         Connect on LinkedIn

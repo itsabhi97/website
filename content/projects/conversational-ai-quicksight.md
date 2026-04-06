@@ -2,7 +2,7 @@
 title: "Conversational AI Analytics Platform"
 date: "2023-01-01"
 desc: "Transformed QuickBase data into conversational AI analytics using Amazon Q and AWS Quicksight for a premier electrical contractor."
-tags: ["AWS Glue", "AWS S3", "Amazon QuickSight", "Amazon Q"]
+tags: ["AWS", "Glue", "S3", "QuickSight", "Amazon Q Business"]
 ---
 
 ### Overview

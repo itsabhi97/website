@@ -2,7 +2,7 @@
 title: "Enterprise Data Platform Optimization in Databricks"
 date: "2024-01-01"
 desc: "Maintained and optimized an Enterprise Data Platform in Databricks for a biotechnology company, reducing manual effort by 50%."
-tags: ["Databricks", "Data Engineering", "Automation", "Biotechnology"]
+tags: ["Databricks"]
 ---
 
 ### Overview

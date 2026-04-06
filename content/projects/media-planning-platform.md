@@ -2,7 +2,7 @@
 title: "Media Planning Platform Algorithm"
 date: "2021-08-01"
 desc: "Led a team to architect out the frontend, backend, and core algorithms from scratch for a media planning software company."
-tags: ["Python", "Flask", "Material UI", "Algorithms", "Leadership"]
+tags: ["Python", "Flask", "Material UI"]
 ---
 
 ### Overview

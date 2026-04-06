@@ -2,7 +2,7 @@
 title: "AWS Control Tower Implementation"
 date: "2023-05-01"
 desc: "Implementation of AWS Control Tower landing zone for centralised multi-account governance for an integration and digital transformations company."
-tags: ["AWS", "Terraform", "DevOps", "Compliance"]
+tags: ["AWS", "Terraform", "AWS Control Tower", "CloudFormation", "AWS Config"]
 ---
 
 ### Overview
