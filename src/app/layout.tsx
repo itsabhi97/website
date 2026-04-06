@@ -14,21 +14,30 @@ export const metadata: Metadata = {
   description: "Portfolio of a seasoned Data Engineer, Software Developer, and Cloud Engineer.",
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${inter.variable} min-h-screen bg-[var(--background)] text-[var(--foreground)] selection:bg-blue-500 selection:text-white flex flex-col`}
+        className={`${inter.variable} min-h-screen bg-[#F9FAFB] dark:bg-[#0a0a0a] text-neutral-900 dark:text-neutral-100 selection:bg-blue-500 selection:text-white flex flex-col transition-colors duration-300`}
       >
-        <Navigation />
-        <main className="flex-1 w-full max-w-5xl mx-auto px-6 py-12 md:py-24">
-          {children}
-        </main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <Navigation />
+          <main className="flex-1 w-full max-w-5xl mx-auto px-6 py-12 md:py-24">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

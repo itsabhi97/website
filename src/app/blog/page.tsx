@@ -13,10 +13,10 @@ export default function BlogPage() {
     return (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-3xl mx-auto">
             <div className="mb-16">
-                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white mb-6">
                     Writings & Insights
                 </h1>
-                <p className="text-lg text-neutral-400">
+                <p className="text-lg text-neutral-600 dark:text-neutral-400">
                     A collection of guides, case studies, and engineering thoughts from navigating complex data and cloud environments.
                 </p>
             </div>

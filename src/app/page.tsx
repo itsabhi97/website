@@ -20,15 +20,15 @@ export default function Home() {
             </div>
           </div> */}
 
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight min-h-[140px] md:min-h-[180px]">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-neutral-900 dark:text-white mb-6 leading-tight min-h-[140px] md:min-h-[180px]">
             <Typewriter text={personalInfo.name} delay={0.2} /> <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 text-3xl md:text-5xl block mt-4">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-500 dark:to-purple-500 text-3xl md:text-5xl block mt-4">
               <Typewriter text={personalInfo.role} delay={1.0} />
             </span>
           </h1>
 
           <FadeIn delay={1.8}>
-            <p className="text-lg md:text-xl text-neutral-400 mb-10 leading-relaxed max-w-2xl">
+            <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 mb-10 leading-relaxed max-w-2xl">
               {personalInfo.bio}
             </p>
           </FadeIn>
@@ -37,13 +37,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <Link
                 href="/projects"
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-black bg-white hover:bg-neutral-200 transition-colors duration-200"
+                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white dark:text-black bg-blue-600 dark:bg-white hover:bg-blue-700 dark:hover:bg-neutral-200 transition-colors duration-200 shadow-sm"
               >
                 View Work <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-6 py-3 border border-white/10 text-base font-medium rounded-lg text-white bg-white/5 hover:bg-white/10 transition-colors duration-200"
+                className="inline-flex items-center justify-center px-6 py-3 border border-black/10 dark:border-white/10 text-base font-medium rounded-lg text-black dark:text-white bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors duration-200 shadow-sm"
               >
                 Get in Touch
               </Link>
@@ -54,8 +54,8 @@ export default function Home() {
         <div className="lg:col-span-5 flex flex-col justify-center lg:items-end order-1 lg:order-2">
           <div className="flex flex-col items-center">
             <FadeIn direction="left" delay={0.5}>
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/10 shadow-[0_0_40px_-10px_rgba(59,130,246,0.3)] group mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
+              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white md:border-transparent dark:border-white/10 shadow-[0_4px_40px_-5px_rgba(59,130,246,0.3)] dark:shadow-[0_0_40px_-10px_rgba(59,130,246,0.3)] group mx-auto">
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 mix-blend-overlay z-10 transition-opacity duration-500 group-hover:opacity-0" />
                 <Image
                   src={personalInfo.profilePicture}
                   alt="Developer Profile Picture"
@@ -68,13 +68,13 @@ export default function Home() {
 
             <FadeIn direction="up" delay={0.8} className="mt-8">
               <div className="flex items-center space-x-6">
-                <Link href={personalInfo.socials.github} target="_blank" className="text-neutral-400 hover:text-white hover:scale-110 transition-all duration-300">
+                <Link href={personalInfo.socials.github} target="_blank" className="text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white hover:scale-110 transition-all duration-300">
                   <Github className="w-7 h-7" />
                 </Link>
-                <Link href={personalInfo.socials.linkedin} target="_blank" className="text-neutral-400 hover:text-[#0A66C2] hover:scale-110 transition-all duration-300">
+                <Link href={personalInfo.socials.linkedin} target="_blank" className="text-neutral-500 hover:text-[#0A66C2] dark:text-neutral-400 dark:hover:text-[#0A66C2] hover:scale-110 transition-all duration-300">
                   <Linkedin className="w-7 h-7" />
                 </Link>
-                <Link href={`mailto:${personalInfo.socials.email}`} className="text-neutral-400 hover:text-red-400 hover:scale-110 transition-all duration-300">
+                <Link href={`mailto:${personalInfo.socials.email}`} className="text-neutral-500 hover:text-red-500 dark:text-neutral-400 dark:hover:text-red-400 hover:scale-110 transition-all duration-300">
                   <Mail className="w-7 h-7" />
                 </Link>
               </div>
@@ -84,21 +84,21 @@ export default function Home() {
       </div>
 
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full pt-8 border-t border-white/5">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full pt-8 border-t border-black/5 dark:border-white/5">
         <div className="flex flex-col space-y-3 group">
-          <Database className="w-8 h-8 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
-          <h3 className="font-semibold text-lg text-neutral-200">Data Engineering</h3>
-          <p className="text-neutral-500 text-sm leading-relaxed">Designing scalable data lakes, resilient ETL pipelines, and warehouse architectures.</p>
+          <Database className="w-8 h-8 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+          <h3 className="font-semibold text-lg text-neutral-900 dark:text-neutral-200">Data Engineering</h3>
+          <p className="text-neutral-600 dark:text-neutral-500 text-sm leading-relaxed">Designing scalable data lakes, resilient ETL pipelines, and warehouse architectures.</p>
         </div>
         <div className="flex flex-col space-y-3 group">
-          <Code2 className="w-8 h-8 text-purple-400 group-hover:scale-110 transition-transform duration-300" />
-          <h3 className="font-semibold text-lg text-neutral-200">Software Dev</h3>
-          <p className="text-neutral-500 text-sm leading-relaxed">Designing and developing applications with robust backend APIs for modern scale.</p>
+          <Code2 className="w-8 h-8 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform duration-300" />
+          <h3 className="font-semibold text-lg text-neutral-900 dark:text-neutral-200">Software Dev</h3>
+          <p className="text-neutral-600 dark:text-neutral-500 text-sm leading-relaxed">Designing and developing applications with robust backend APIs for modern scale.</p>
         </div>
         <div className="flex flex-col space-y-3 group">
-          <Cloud className="w-8 h-8 text-indigo-400 group-hover:scale-110 transition-transform duration-300" />
-          <h3 className="font-semibold text-lg text-neutral-200">Cloud Platform</h3>
-          <p className="text-neutral-500 text-sm leading-relaxed">Designing and deploying highly-available cloud-native systems with modern DevOps practices.</p>
+          <Cloud className="w-8 h-8 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform duration-300" />
+          <h3 className="font-semibold text-lg text-neutral-900 dark:text-neutral-200">Cloud Platform</h3>
+          <p className="text-neutral-600 dark:text-neutral-500 text-sm leading-relaxed">Designing and deploying highly-available cloud-native systems with modern DevOps practices.</p>
         </div>
       </div>
 

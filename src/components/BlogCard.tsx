@@ -21,11 +21,11 @@ export default function BlogCard({ post }: { post: ParsedData }) {
                 <time dateTime={post.date}>{formattedDate}</time>
             </div>
 
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-indigo-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 inline-block">
+            <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-indigo-600 dark:group-hover:from-purple-400 dark:group-hover:to-indigo-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 inline-block">
                 {post.title}
             </h3>
 
-            <p className="text-neutral-400 mb-4 line-clamp-2">
+            <p className="text-neutral-600 dark:text-neutral-400 mb-4 line-clamp-2">
                 {post.desc}
             </p>
 

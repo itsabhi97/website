@@ -68,7 +68,7 @@ export default async function TagFilteredProjectsPage({ params }: { params: Prom
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             <Link
                 href="/"
-                className="inline-flex items-center text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-200 mb-8"
+                className="inline-flex items-center text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors duration-200 mb-8"
             >
                 <ArrowLeft className="mr-2 w-4 h-4" />
                 Back to home
@@ -76,14 +76,14 @@ export default async function TagFilteredProjectsPage({ params }: { params: Prom
 
             <div className="mb-12">
                 <div className="flex items-center space-x-3 mb-4">
-                    <div className="bg-blue-500/20 p-2 rounded-lg text-blue-400">
+                    <div className="bg-blue-500/10 dark:bg-blue-500/20 p-2 rounded-lg text-blue-600 dark:text-blue-400">
                         <Layers className="w-8 h-8" />
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white capitalize">
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white capitalize">
                         {displayTag} Projects
                     </h1>
                 </div>
-                <p className="text-lg text-neutral-400 max-w-2xl">
+                <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
                     Showing {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'} utilizing this technology.
                 </p>
             </div>
@@ -95,9 +95,9 @@ export default async function TagFilteredProjectsPage({ params }: { params: Prom
                     ))}
                 </div>
             ) : (
-                <div className="text-center py-20 bg-white/5 border border-white/10 rounded-2xl">
-                    <p className="text-neutral-400 text-lg">No projects found with this tag.</p>
-                    <Link href="/projects" className="text-blue-400 hover:text-blue-300 mt-4 inline-block font-medium">
+                <div className="text-center py-20 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-2xl">
+                    <p className="text-neutral-600 dark:text-neutral-400 text-lg">No projects found with this tag.</p>
+                    <Link href="/projects" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mt-4 inline-block font-medium">
                         View all projects
                     </Link>
                 </div>

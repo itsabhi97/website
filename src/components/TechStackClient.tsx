@@ -39,7 +39,7 @@ export default function TechStackClient({ categories, availableIcons }: { catego
                 key={item}
                 href={`/projects/tag/${slugifyTag(item)}`}
                 onClick={() => setSelectedCategory(null)}
-                className="flex items-center gap-3 p-3 rounded-xl border border-white/5 bg-black/50 hover:bg-white/10 transition-all duration-300 group shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] w-full sm:w-auto"
+                className="flex items-center gap-3 p-3 rounded-xl border border-black/5 dark:border-white/5 bg-black/5 dark:bg-black/50 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 group shadow-[inset_0_1px_1px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] w-full sm:w-auto"
             >
                 {iconPath ? (
                     <div className="relative w-6 h-6 shrink-0 group-hover:scale-110 transition-transform duration-300">
@@ -47,13 +47,13 @@ export default function TechStackClient({ categories, availableIcons }: { catego
                             src={iconPath}
                             alt={item}
                             fill
-                            className={`object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${isSvg ? 'invert opacity-90' : ''}`}
+                            className={`object-contain drop-shadow-sm dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${isSvg ? 'dark:invert opacity-90' : ''}`}
                         />
                     </div>
                 ) : (
-                    <div className="w-6 h-6 shrink-0 bg-white/10 rounded-md flex items-center justify-center text-[10px] font-bold text-white/50">{item.charAt(0)}</div>
+                    <div className="w-6 h-6 shrink-0 bg-black/5 dark:bg-white/10 rounded-md flex items-center justify-center text-[10px] font-bold text-neutral-400 dark:text-white/50">{item.charAt(0)}</div>
                 )}
-                <span className="text-sm font-semibold tracking-wide text-neutral-300 group-hover:text-white transition-colors">{item}</span>
+                <span className="text-sm font-semibold tracking-wide text-neutral-600 dark:text-neutral-300 group-hover:text-black dark:group-hover:text-white transition-colors">{item}</span>
             </Link>
         );
     };
@@ -88,13 +88,13 @@ export default function TechStackClient({ categories, availableIcons }: { catego
             {/* Toggle Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-6">
                 <div>
-                    <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-3">Technical Arsenal</h1>
-                    <p className="text-neutral-400 text-lg max-w-2xl">
+                    <h1 className="text-4xl md:text-6xl font-extrabold text-neutral-900 dark:text-white tracking-tight mb-3">Technical Arsenal</h1>
+                    <p className="text-neutral-600 dark:text-neutral-400 text-lg max-w-2xl">
                         An engineered dashboard mapping my cloud infrastructure, data engineering, and software stack.
                     </p>
                 </div>
 
-                <div className="flex items-center p-1.5 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-md self-start shrink-0">
+                <div className="flex items-center p-1.5 bg-black/5 dark:bg-white/5 rounded-2xl border border-black/10 dark:border-white/10 backdrop-blur-md self-start shrink-0">
                     <button
                         onClick={() => setViewMode('compact')}
                         className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${viewMode === 'compact' ? 'bg-blue-500/20 text-blue-400 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] border border-blue-500/30' : 'text-neutral-400 hover:text-white border border-transparent'}`}
@@ -122,14 +122,14 @@ export default function TechStackClient({ categories, availableIcons }: { catego
 
                         return (
                             <FadeIn key={category.name} delay={i * 0.1} className={`h-full ${isLarge ? 'md:col-span-2' : ''} ${isHuge ? 'xl:row-span-2' : ''}`}>
-                                <GlowCard className="h-full flex flex-col p-6 md:p-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-md">
+                                <GlowCard className="h-full flex flex-col p-6 md:p-8 rounded-3xl border border-black/10 dark:border-white/10 bg-gradient-to-br from-black/5 dark:from-white/5 to-transparent backdrop-blur-md">
                                     <Link href={`/projects/tag/${slugifyTag(category.name)}`} onClick={() => setSelectedCategory(null)} className="inline-flex items-center gap-4 w-fit mb-8 group cursor-pointer">
                                         {iconPath && (
                                             <div className="relative w-8 h-8 shrink-0 transition-transform duration-300 group-hover:scale-110">
-                                                <Image src={iconPath} alt={category.name} fill className={`object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${isSvg ? 'invert opacity-90' : ''}`} />
+                                                <Image src={iconPath} alt={category.name} fill className={`object-contain drop-shadow-sm dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${isSvg ? 'dark:invert opacity-90' : ''}`} />
                                             </div>
                                         )}
-                                        <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 tracking-tight transition-opacity">{category.name}</h2>
+                                        <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 tracking-tight transition-opacity">{category.name}</h2>
                                     </Link>
                                     {renderCategoryContents(category)}
                                 </GlowCard>
@@ -151,16 +151,16 @@ export default function TechStackClient({ categories, availableIcons }: { catego
                             <FadeIn key={category.name} delay={i * 0.05} className="h-full">
                                 <button
                                     onClick={() => setSelectedCategory(category)}
-                                    className="w-full h-full text-left flex flex-col items-center justify-center p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] active:scale-95 group relative overflow-hidden"
+                                    className="w-full h-full text-left flex flex-col items-center justify-center p-8 rounded-2xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] active:scale-95 group relative overflow-hidden"
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                     {iconPath && (
                                         <div className="relative w-12 h-12 mb-4 shrink-0 transition-transform duration-300 group-hover:scale-110 z-10">
-                                            <Image src={iconPath} alt={category.name} fill className={`object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${isSvg ? 'invert opacity-90' : ''}`} />
+                                            <Image src={iconPath} alt={category.name} fill className={`object-contain drop-shadow-sm dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${isSvg ? 'dark:invert opacity-90' : ''}`} />
                                         </div>
                                     )}
-                                    <h3 className="text-lg md:text-xl font-bold text-white text-center mb-2 z-10">{category.name}</h3>
-                                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-400 z-10">{totalItems} Tools</span>
+                                    <h3 className="text-lg md:text-xl font-bold text-neutral-900 dark:text-white text-center mb-2 z-10">{category.name}</h3>
+                                    <span className="text-xs font-semibold uppercase tracking-widest text-blue-600 dark:text-blue-400 z-10">{totalItems} Tools</span>
                                 </button>
                             </FadeIn>
                         );
@@ -184,22 +184,22 @@ export default function TechStackClient({ categories, availableIcons }: { catego
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ duration: 0.3, type: "spring", bounce: 0.2 }}
-                            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-4xl max-h-[85vh] overflow-y-auto z-[101] bg-[#0a0a0a] border border-white/10 rounded-3xl shadow-2xl p-6 md:p-10"
+                            className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-4xl max-h-[85vh] overflow-y-auto z-[101] bg-white dark:bg-[#0a0a0a] border border-black/10 dark:border-white/10 rounded-3xl shadow-2xl p-6 md:p-10"
                         >
-                            <div className="flex justify-between items-start mb-8 sticky top-0 bg-[#0a0a0a]/90 backdrop-blur-md pt-2 pb-4 border-b border-white/5 z-20">
+                            <div className="flex justify-between items-start mb-8 sticky top-0 bg-white/95 dark:bg-[#0a0a0a]/90 backdrop-blur-md pt-2 pb-4 border-b border-black/5 dark:border-white/5 z-20">
                                 <Link href={`/projects/tag/${slugifyTag(selectedCategory.name)}`} onClick={() => setSelectedCategory(null)} className="inline-flex items-center gap-4 group">
                                     {(findIcon(selectedCategory.name)) && (
                                         <div className="relative w-10 h-10 shrink-0 transition-transform duration-300 group-hover:scale-110">
-                                            <Image src={findIcon(selectedCategory.name)!} alt={selectedCategory.name} fill className={`object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${findIcon(selectedCategory.name)?.endsWith('.svg') ? 'invert opacity-90' : ''}`} />
+                                            <Image src={findIcon(selectedCategory.name)!} alt={selectedCategory.name} fill className={`object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] ${findIcon(selectedCategory.name)?.endsWith('.svg') ? 'dark:invert opacity-90' : ''}`} />
                                         </div>
                                     )}
-                                    <h2 className="text-3xl md:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 tracking-tight transition-opacity cursor-pointer">
+                                    <h2 className="text-3xl md:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500 tracking-tight transition-opacity cursor-pointer">
                                         {selectedCategory.name}
                                     </h2>
                                 </Link>
                                 <button
                                     onClick={() => setSelectedCategory(null)}
-                                    className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors"
+                                    className="p-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-neutral-900 dark:text-white transition-colors"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
                                 </button>

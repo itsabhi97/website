@@ -37,14 +37,14 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         <article className="max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
             <Link
                 href="/projects"
-                className="inline-flex items-center text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-200 mb-8"
+                className="inline-flex items-center text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors duration-200 mb-8"
             >
                 <ArrowLeft className="mr-2 w-4 h-4" />
                 Back to projects
             </Link>
 
             <header className="mb-12">
-                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-white mb-6">
                     {postData.title}
                 </h1>
 
@@ -52,7 +52,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     {postData.tags?.map((tag: string) => (
                         <span
                             key={tag}
-                            className="px-3 py-1 text-xs font-medium text-blue-300 bg-blue-500/10 rounded-full border border-blue-500/20"
+                            className="px-3 py-1 text-xs font-medium text-blue-700 dark:text-blue-300 bg-blue-500/10 rounded-full border border-blue-500/20"
                         >
                             {tag}
                         </span>
@@ -60,14 +60,14 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 </div>
 
                 {postData.desc && (
-                    <p className="text-xl text-neutral-400 leading-relaxed">
+                    <p className="text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed">
                         {postData.desc}
                     </p>
                 )}
             </header>
 
             <div
-                className="prose prose-invert prose-blue max-w-none prose-p:leading-relaxed prose-pre:bg-white/5 prose-pre:border prose-pre:border-white/10"
+                className="prose dark:prose-invert prose-blue max-w-none prose-p:leading-relaxed prose-pre:bg-black/5 dark:prose-pre:bg-white/5 prose-pre:border prose-pre:border-black/10 dark:prose-pre:border-white/10"
                 dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
             />
         </article>
