@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 
-const NUM_STARS = 250;
+const NUM_PARTICLES = 120;
 
-interface Star {
+interface Particle {
     x: number;
     y: number;
     radius: number;
@@ -18,7 +18,7 @@ interface Star {
 
 const CosmosBackground = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const starsRef = useRef<Star[]>([]);
+    const particlesRef = useRef<Particle[]>([]);
     const mouseRef = useRef({ x: 0, y: 0 });
     const targetMouseRef = useRef({ x: 0, y: 0 });
     const { resolvedTheme } = useTheme();
@@ -59,18 +59,18 @@ const CosmosBackground = () => {
         };
         window.addEventListener("mousemove", handleMouseMove);
 
-        // Initialize stars only once
-        if (starsRef.current.length === 0) {
+        // Initialize particles
+        if (particlesRef.current.length === 0) {
             const starColors = ["#ffffff", "#ffe9c4", "#d4fbff"];
-            for (let i = 0; i < NUM_STARS; i++) {
-                starsRef.current.push({
+            for (let i = 0; i < NUM_PARTICLES; i++) {
+                particlesRef.current.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    radius: Math.random() * 1.5 + 0.1,
+                    radius: Math.random() * 1.5 + 0.5, // Slightly larger base for network nodes
                     alpha: Math.random(),
                     alphaChange: (Math.random() - 0.5) * 0.02,
-                    speedX: (Math.random() - 0.5) * 0.05,
-                    speedY: (Math.random() - 0.5) * 0.05,
+                    speedX: (Math.random() - 0.5) * 0.1,
+                    speedY: (Math.random() - 0.5) * 0.1,
                     color: starColors[Math.floor(Math.random() * starColors.length)],
                 });
             }
@@ -88,8 +88,8 @@ const CosmosBackground = () => {
                 gradient.addColorStop(0.5, "#0a0a1a");
                 gradient.addColorStop(1, "#1a1025");
             } else {
-                gradient.addColorStop(0, "#f8fafc");
-                gradient.addColorStop(0.5, "#f1f5f9");
+                gradient.addColorStop(0, "#ffffff");
+                gradient.addColorStop(0.5, "#f8fafc");
                 gradient.addColorStop(1, "#e2e8f0");
             }
 
@@ -100,46 +100,80 @@ const CosmosBackground = () => {
             mouseRef.current.x += (targetMouseRef.current.x - mouseRef.current.x) * 0.05;
             mouseRef.current.y += (targetMouseRef.current.y - mouseRef.current.y) * 0.05;
 
-            // Draw stars/particles
-            starsRef.current.forEach((star) => {
-                const parallaxX = mouseRef.current.x * (star.radius * 2);
-                const parallaxY = mouseRef.current.y * (star.radius * 2);
+            // Update and draw connections
+            for (let i = 0; i < particlesRef.current.length; i++) {
+                const p1 = particlesRef.current[i];
 
-                star.x += star.speedX - parallaxX;
-                star.y += star.speedY - parallaxY;
+                // Parallax movement
+                const parallaxX = mouseRef.current.x * (p1.radius * 3);
+                const parallaxY = mouseRef.current.y * (p1.radius * 3);
 
-                if (star.x < 0) star.x = width;
-                if (star.x > width) star.x = 0;
-                if (star.y < 0) star.y = height;
-                if (star.y > height) star.y = 0;
+                p1.x += p1.speedX - parallaxX;
+                p1.y += p1.speedY - parallaxY;
 
-                star.alpha += star.alphaChange;
-                if (star.alpha <= 0.1) {
-                    star.alpha = 0.1;
-                    star.alphaChange = Math.abs(star.alphaChange);
-                } else if (star.alpha >= 1) {
-                    star.alpha = 1;
-                    star.alphaChange = -Math.abs(star.alphaChange);
+                // Screen wrapping
+                if (p1.x < 0) p1.x = width;
+                if (p1.x > width) p1.x = 0;
+                if (p1.y < 0) p1.y = height;
+                if (p1.y > height) p1.y = 0;
+
+                // Twinkling effect
+                p1.alpha += p1.alphaChange;
+                if (p1.alpha <= 0.1) {
+                    p1.alpha = 0.1;
+                    p1.alphaChange = Math.abs(p1.alphaChange);
+                } else if (p1.alpha >= 1) {
+                    p1.alpha = 1;
+                    p1.alphaChange = -Math.abs(p1.alphaChange);
                 }
 
+                // Draw network connections
+                for (let j = i + 1; j < particlesRef.current.length; j++) {
+                    const p2 = particlesRef.current[j];
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    const maxDistance = 120; // threshold for a connection
+                    if (distance < maxDistance) {
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+
+                        // Line opacity fades out based on distance between the two points
+                        const opacity = (1 - distance / maxDistance) * 0.6; // Max 0.6 opacity
+
+                        if (isDark) {
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * p1.alpha})`;
+                        } else {
+                            // Darkish blue/indigo for light mode connections
+                            ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * p1.alpha})`;
+                        }
+
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+
+                // Draw particle (node)
                 ctx.beginPath();
-                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
 
                 if (isDark) {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-                    if (star.radius > 1) {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p1.alpha})`;
+                    if (p1.radius > 1) {
                         ctx.shadowBlur = 8;
-                        ctx.shadowColor = star.color;
+                        ctx.shadowColor = p1.color;
                     } else {
                         ctx.shadowBlur = 0;
                     }
                 } else {
-                    ctx.fillStyle = `rgba(99, 102, 241, ${star.alpha * 0.6})`;
+                    ctx.fillStyle = `rgba(99, 102, 241, ${p1.alpha * 0.8})`;
                     ctx.shadowBlur = 0;
                 }
 
                 ctx.fill();
-            });
+            }
 
             animationFrameId = requestAnimationFrame(draw);
         };
