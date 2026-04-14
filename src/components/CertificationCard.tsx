@@ -19,7 +19,7 @@ export default function CertificationCard({ title, credentialUrl, icon }: Certif
                     {icon ? (
                         <div className="relative w-7 h-7 group-hover:scale-110 transition-transform duration-300">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={icon} alt={`${title} icon`} className="w-full h-full object-contain drop-shadow-sm dark:drop-shadow-[0_0_6px_rgba(255,255,255,0.2)] rounded-lg overflow-hidden" />
+                            <img src={icon?.startsWith('/') && !icon.startsWith(process.env.NEXT_PUBLIC_BASE_PATH || '/_ignore_') ? `${process.env.NEXT_PUBLIC_BASE_PATH || ''}${icon}` : icon} alt={`${title} icon`} className="w-full h-full object-contain drop-shadow-sm dark:drop-shadow-[0_0_6px_rgba(255,255,255,0.2)] rounded-lg overflow-hidden" />
                         </div>
                     ) : (
                         <Award className="w-6 h-6 text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform duration-300" />

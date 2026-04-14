@@ -27,7 +27,8 @@ export default function TechStackClient({ categories, availableIcons }: { catego
     const findIcon = (toolName: string) => {
         const slug = toolName.toLowerCase().replace(/\s+/g, '-');
         const match = availableIcons.find(f => f.toLowerCase().replace(/\.[^/.]+$/, "") === slug);
-        return match ? `/icons/${match}` : null;
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+        return match ? `${basePath}/icons/${match}` : null;
     };
 
     const renderItem = (item: string) => {
